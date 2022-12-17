@@ -1823,6 +1823,7 @@ tagtoleft(const Arg *arg) {
 		selmon->sel->tags >>= 1;
 		focus(NULL);
 		arrange(selmon);
+    viewtoleft(arg);
 	}
 }
 
@@ -1834,6 +1835,7 @@ tagtoright(const Arg *arg) {
 		selmon->sel->tags <<= 1;
 		focus(NULL);
 		arrange(selmon);
+    viewtoright(arg);
 	}
 }
 
@@ -2088,8 +2090,6 @@ sigchld(int unused)
 void
 spawn(const Arg *arg)
 {
-	if (arg->v == dmenucmd)
-		dmenumon[0] = '0' + selmon->num;
 	selmon->tagset[selmon->seltags] &= ~scratchtag;
 	if (fork() == 0) {
 		if (dpy)
